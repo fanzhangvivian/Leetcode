@@ -13,6 +13,7 @@ class Solution(object):
                 nums[i] = x
                 i += 1
         return i
-        
+            
 # @lc code=end
+# add
 
