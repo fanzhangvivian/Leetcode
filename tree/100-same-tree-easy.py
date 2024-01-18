@@ -13,19 +13,71 @@
 #         self.right = right
 import collections
 class Solution(object):
+    #递归法
     def isSameTree(self, p, q):
         """
         :type p: TreeNode
         :type q: TreeNode
         :rtype: bool
         """
-    
         if p == None and q == None:
             return True
+        elif p != None and q == None:
+            return False
+        elif p == None and q!= None:
+            return False
+        elif p.val != q.val:
+            return False
         
-        queue = collections.deque([p, q])
-        
+        left_compare = self.isSameTree(p.left, q.left)
+        right_compare = self.isSameTree(p.right, q.right)
+        result = left_compare and right_compare
 
+        return result
+
+    #利用队列迭代法
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """
+
+        if p == None and q == None:
+            return True
+        queue = collections.deque([p, q])
+
+        while queue:
+            leftnode = queue.popleft()
+            rightnode = queue.popleft()
+
+            if leftnode == None and rightnode == None:
+                continue
+            elif leftnode != None and rightnode == None:
+                return False
+            elif leftnode == None and rightnode != None:
+                return False
+            elif leftnode.val != rightnode.val:
+                return False
+            
+            queue.append(leftnode.left)
+            queue.append(rightnode.left)
+            queue.append(leftnode.right)
+            queue.append(rightnode.right)
+
+        return True
+    
+
+    #层序遍历法
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """    
+        if p == None and q == None:
+            return True
+        queue = collections.deque([p, q])
         while queue:
             queue_size = len(queue)
 
