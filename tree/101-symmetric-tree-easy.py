@@ -55,57 +55,61 @@ class Solution(object):
      """
      if root == None:
           return True
-     return self.compare(root.left, root.right)
+     return self.compare(root.left, root.right) != -1
     
     def compare(self, right, left):
-        if left == None and right != None:
-            return False
+        if left is None and right != None:
+            return -1
         elif left != None and right == None:
-            return False
+            return -1
         elif left == None and right == None:
-            return True
+            return 0
         elif left.val != right.val:
-            return False
+            return -1
         
         outside = self.compare(left.left, right.right)
         inside = self.compare(left.right, right.left)
-        result = outside and inside
-
-        return result
-    
-    
-
-#迭代法 1.建立队列比较左右子树内外侧 2 左右子节点为空或者其中一个为空或者不为空，但是不相等 即为假； 若均为空节点，则继续
-    # 加入队列是 左子树的左节点，右子树的右节点，左子树的右节点，右子树的左节点 这样保证队列pop出来的俩节点是对称关系，并进行比较
-class Solution(object):
-    def isSymmetric(self, root):
+        if outside == -1 or inside == -1 :
+            return -1
+        else:
+            return 0
         
-        if root == None:
-            return True
-        #建立一个空的队列 并把左右子树头节点添加进去
-        queue = collections.deque() #或者使用栈 st=[] 其实是一样的方法
-        queue.append(root.left)
-        queue.append(root.right)
 
-        while queue:
-            leftnode = queue.popleft()
-            rightnode = queue.popleft()
-            # 左节点，右节点都为空，说明对称 继续向下比较
-            if leftnode == None and rightnode == None:
-                continue
-            #左右一个节点不为空，或者都不为空但数值不相同，返回false
-            elif leftnode != None and rightnode == None:
-                return False
-            elif leftnode == None and rightnode != None:
-                return False
-            elif leftnode.val != rightnode.val:
-                return False
+        
+    
+    
+
+# #迭代法 1.建立队列比较左右子树内外侧 2 左右子节点为空或者其中一个为空或者不为空，但是不相等 即为假； 若均为空节点，则继续
+#     # 加入队列是 左子树的左节点，右子树的右节点，左子树的右节点，右子树的左节点 这样保证队列pop出来的俩节点是对称关系，并进行比较
+# class Solution(object):
+#     def isSymmetric(self, root):
+        
+#         if root == None:
+#             return True
+#         #建立一个空的队列 并把左右子树头节点添加进去
+#         queue = collections.deque() #或者使用栈 st=[] 其实是一样的方法
+#         queue.append(root.left)
+#         queue.append(root.right)
+
+#         while queue:
+#             leftnode = queue.popleft()
+#             rightnode = queue.popleft()
+#             # 左节点，右节点都为空，说明对称 继续向下比较
+#             if leftnode == None and rightnode == None:
+#                 continue
+#             #左右一个节点不为空，或者都不为空但数值不相同，返回false
+#             elif leftnode != None and rightnode == None:
+#                 return False
+#             elif leftnode == None and rightnode != None:
+#                 return False
+#             elif leftnode.val != rightnode.val:
+#                 return False
             
-            queue.append(leftnode.left) #加入左节点左孩子
-            queue.append(rightnode.right) #加入右节点右孩子
-            queue.append(leftnode.right) #加入左节点右孩子
-            queue.append(rightnode.left) #加入右节点左孩子
-        return True
+#             queue.append(leftnode.left) #加入左节点左孩子
+#             queue.append(rightnode.right) #加入右节点右孩子
+#             queue.append(leftnode.right) #加入左节点右孩子
+#             queue.append(rightnode.left) #加入右节点左孩子
+#         return True
 
         
 # @lc code=end

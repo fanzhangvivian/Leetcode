@@ -43,7 +43,7 @@ class Solution(object):
         :rtype: bool
         """
 
-        if p == None and q == None:
+        if p is None and q is None:
             return True
         queue = collections.deque([p, q])
 
@@ -51,11 +51,11 @@ class Solution(object):
             leftnode = queue.popleft()
             rightnode = queue.popleft()
 
-            if leftnode == None and rightnode == None:
+            if leftnode is None and rightnode is None:
                 continue
-            elif leftnode != None and rightnode == None:
+            elif leftnode is not None and rightnode is None:
                 return False
-            elif leftnode == None and rightnode != None:
+            elif leftnode is None and rightnode is not None:
                 return False
             elif leftnode.val != rightnode.val:
                 return False
@@ -75,7 +75,7 @@ class Solution(object):
         :type q: TreeNode
         :rtype: bool
         """    
-        if p == None and q == None:
+        if p is None and q is None:
             return True
         queue = collections.deque([p, q])
         while queue:

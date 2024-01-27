@@ -19,7 +19,7 @@ class Solution(object):
         :rtype: bool
         """
         #如果root为空，则subRoot不在里面
-        if root == None:
+        if root is None:
             return False
         # 直接从根节点开始比较
         if self.comparetree(root, subRoot):
@@ -28,9 +28,9 @@ class Solution(object):
         return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
     
     def comparetree(self, r, s):
-        if r == None and s == None:
+        if r is None and s is None:
             return True
-        elif r == None or s == None:
+        elif r is None or s is None:
             return False
         # 当根节点值相等且左右子树一样，才返回True
         elif r and s:        
