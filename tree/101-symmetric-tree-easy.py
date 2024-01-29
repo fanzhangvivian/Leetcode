@@ -71,8 +71,7 @@ class Solution(object):
         inside = self.compare(left.right, right.left)
         if outside == -1 or inside == -1 :
             return -1
-        else:
-            return 0
+        
         
 
         
