@@ -1,2 +1,2 @@
 # Leetcode
-#Daily Leetcode Recordings
+## Daily Leetcode Recordings of solutions
