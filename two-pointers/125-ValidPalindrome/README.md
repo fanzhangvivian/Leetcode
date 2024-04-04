@@ -12,7 +12,7 @@ Use two pointers from left and right
 <!-- Add your space complexity here, e.g. $$O(n)$$ -->
 
 # Code
-```
+```python
 class Solution(object):
     def isPalindrome(self, s):
         """
