@@ -12,14 +12,14 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        result = [0] * len(temperatures) 
+        result = [0] * len(temperatures) # default a list with len(temp)*0
         stack = []
         
         for i, temp in enumerate(temperatures):
             while stack and temperatures[stack[-1]] < temp:
-                index = stack.pop()
-                result[index] = i - index
-            stack.append(i)
+                index = stack.pop()  # pop the index when finding a tem is greater than the index tem
+                result[index] = i - index  # record the count by i - index
+            stack.append(i) # append the current i into stack to compare
 
         return result
         
