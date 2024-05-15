@@ -12,33 +12,22 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        # Slide the valid replace window
-        # Bullet point: how to find the valid window
-        # 1. Find the most frequency in the window
-        # 2. Use the current window length subscribe the most frequency number;
-        # 3. If it is smaller and equal to k, it indicates that it is a valid window;
-        # since the replacement number is smaller and equal to k. 
-        # right pointer continue slide for longer window. Also update the current max length of the window
-        # 4. If it is bigger than k, it indicates that it is a unvalid window 
-        # since the replacement number is bigger 
-        # Then slide the left pointer to ensure the window is valid. In the meanwhile,
-        # the frequency of the left pointer should reduce 1
-        countfrequency = {}
+        # Bullet point: 1.find the valid window;
+        # 2. how to find valid window that the window length subtract the most frequency is less or equal to k
+        # 3. Always keep the longest window length until find the longer window.
         left = 0
-        maxlen = 0
+        frequency = {}
+        maxlength = float('-inf')
         for right in range(len(s)):
-            if s[right] in countfrequency:
-                countfrequency[s[right]] += 1
+            frequency[s[right]] = 1 + frequency.get(s[right], 0)
+            current_window_length = right - left + 1
+            current_max_frequency = max(frequency.values())
+            if current_window_length - current_max_frequency <= k:
+                maxlength = max(maxlength, current_window_length)
             else:
-                countfrequency[s[right]] = 1
-            current_window_len = right - left + 1 # the current window length
-            current_max_frequency = max(countfrequency.values()) # Find the most frequency in the window
-            if current_window_len - current_max_frequency <= k:
-                maxlen = max(maxlen, current_window_len) # update the current max length of the valid window
-            else:
-                countfrequency[s[left]] -= 1
-                left += 1  # slide the left pointer to ensure the window is valid
-        return maxlen
+                frequency[s[left]] -= 1
+                left += 1
+        return maxlength
         
 # @lc code=end
 

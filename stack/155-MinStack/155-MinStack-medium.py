@@ -9,7 +9,8 @@ class MinStack(object):
 
     def __init__(self):
         self.stack = []
-        self.minstack = [] # record the minest element in current stack with the same quantity
+        self.minstack = [] # Record the minest number when the stack has the same quality
+
     def push(self, val):
         """
         :type val: int
@@ -19,23 +20,21 @@ class MinStack(object):
         if not self.minstack:
             self.minstack.append(val)
         else:
-            self.minstack.append(min(val, self.minstack[-1]))
+            self.minstack.append(min(val, self.minstack[-1])) # Ensure that record the minest number in the each turn
 
     def pop(self):
         """
         :rtype: None
         """
         self.stack.pop()
-        self.minstack.pop() # ! need to pop the top element to ensure the two stack has same number elements
+        self.minstack.pop()
         
-
     def top(self):
         """
         :rtype: int
         """
         return self.stack[-1]
         
-
     def getMin(self):
         """
         :rtype: int
