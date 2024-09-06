@@ -7,20 +7,20 @@
 # @lc code=start
 class Solution(object):
     def dailyTemperatures(self, temperatures):
-        """
-        :type temperatures: List[int]
-        :rtype: List[int]
-        """
-        
-        result = [0] * len(temperatures) # default a list with len(temp)*0
-        stack = []
-        
-        for i, temp in enumerate(temperatures):
-            while stack and temperatures[stack[-1]] < temp:
-                index = stack.pop()  # pop the index when finding a tem is greater than the index tem
-                result[index] = i - index  # record the count by i - index
-            stack.append(i) # append the current i into stack to compare
+        # use a stack to record temp index
+        # once the current temp > top of stack, we can pop
+        # until the top temp > current temp
+        # add the smaller current temp into stack
+        # use a list of initial value of 0 to update
 
+        result = [0] * len(temperatures)
+        stack = []
+
+        for i in range(len(temperatures)):
+            while stack and stack[-1] < temperatures[i]:
+                result[stack[-1]] = i - stack[-1]
+                stack.pop()
+            stack.append(temperatures[i])
         return result
         
 
